@@ -51,7 +51,7 @@ class CollectionRoute
     {
         foreach ($this->routes as $priority => $items) {
             if (isset($items[$name])) {
-                unset($this->routes[$priority][$name]);
+                $this->removeWithPriority($name, $priority);
             }
         }
 
