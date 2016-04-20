@@ -1,6 +1,9 @@
 filter:
     paths:
         - 'src/*'
+    excluded_paths:
+        - 'src/PTS/Routing/Middlewares/*'
+
 checks:
     php:
         uppercase_constants: true
