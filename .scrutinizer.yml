@@ -18,6 +18,9 @@ tools:
     external_code_coverage: true
 
 build:
+    environment:
+        php: 7
+
     tests:
         override:
             -
