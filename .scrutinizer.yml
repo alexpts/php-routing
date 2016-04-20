@@ -19,7 +19,8 @@ tools:
 
 build:
     environment:
-        php: 7
+        php:
+            version: 7.0
 
     tests:
         override:
