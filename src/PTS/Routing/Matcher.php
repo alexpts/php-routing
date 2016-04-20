@@ -40,7 +40,7 @@ class Matcher
     {
         foreach ($routes->getRoutes() as $route) {
             $activeRoute = $this->matchRule($route, $path);
-            if ($activeRoute) {
+            if ($activeRoute !== null) {
                 yield $activeRoute;
             }
         }
@@ -55,14 +55,16 @@ class Matcher
      */
     protected function matchRule(Route $route, $pathUrl)
     {
+        $activeRoute = null;
+        
         $regexp = $this->routeService->makeRegExp($route);
 
         if (preg_match('~^' .  $regexp . '$~Uiu', $pathUrl, $values)) {
             $filterValues = array_filter(array_keys($values), 'is_string');
             $matches = array_intersect_key($values, array_flip($filterValues));
-            return $route->setMatches($matches);
+            $activeRoute = $route->setMatches($matches);
         }
 
-        return null;
+        return $activeRoute;
     }
 }
