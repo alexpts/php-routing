@@ -21,7 +21,7 @@ class CheckMethodTest extends PHPUnit_Framework_TestCase
     public function testMiddlewareOk()
     {
         $route = $this->route;
-        $route->pushMiddleware(new CheckMethod);
+        $route->pushMiddleware(new CheckMethod());
         $route->setMethods(['get']);
 
         self::assertEquals(200, $route(new Request('/profile/alex/', 'get')));
@@ -30,7 +30,7 @@ class CheckMethodTest extends PHPUnit_Framework_TestCase
     public function testMiddlewareSkipRoute()
     {
         $route = $this->route;
-        $route->pushMiddleware(new CheckMethod);
+        $route->pushMiddleware(new CheckMethod());
         $route->setMethods(['post']);
 
         self::assertEquals(null, $route(new Request('/profile/alex/', 'get')));
