@@ -26,7 +26,7 @@ class CheckXHR
      */
     public function __invoke(RequestInterface $request, callable $next)
     {
-        $isXHR = 'XMLHttpRequest' === $request->getHeader('X-Requested-With');
+        $isXHR = in_array('XMLHttpRequest', $request->getHeader('X-Requested-With'), true);
 
         switch ($this->state) {
             case self::ONLY_XHR:
