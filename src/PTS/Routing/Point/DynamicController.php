@@ -5,10 +5,10 @@ use PTS\Routing\Route;
 
 class DynamicController extends ControllerPoint
 {
-    private $prefix = '';
+    protected $prefix = '';
 
     /** @var Route */
-    private $route;
+    protected $route;
 
     /**
      * @param Route $route
