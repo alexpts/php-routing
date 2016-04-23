@@ -1,9 +1,11 @@
 <?php
 namespace PTS\Routing;
 
+use PTS\Routing\Traits\MiddlewaresTrait;
+
 class RouteGroup
 {
-    use Traits\Middlewares;
+    use MiddlewaresTrait;
 
     /** @var array */
     protected $methods;
@@ -41,7 +43,7 @@ class RouteGroup
      */
     public function shiftMiddleware()
     {
-        return count($this->middlewares) === 0
+        return count($this->getMiddlewares()) === 0
             ? null
             : array_shift($this->middlewares);
     }

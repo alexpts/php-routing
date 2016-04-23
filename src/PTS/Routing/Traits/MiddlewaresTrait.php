@@ -1,12 +1,12 @@
 <?php
 namespace PTS\Routing\Traits;
 
-use Guzzle\Http\Message\RequestInterface;
+use Psr\Http\Message\RequestInterface;
 
-trait Middlewares
+trait MiddlewaresTrait
 {
     /** @var callable[] */
-    protected $middlewares;
+    protected $middlewares = [];
     
     /**
      * @param callable $middleware
@@ -25,17 +25,12 @@ trait Middlewares
     {
         return $this->middlewares;
     }
-
+    
     /**
      * @param RequestInterface $request
      * @return mixed
      */
-    public function __invoke(RequestInterface $request)
-    {
-        if (count($this->middlewares) === 0) {
-            return null;
-        }
-        
+    protected function invoke(RequestInterface $request) {
         $middleware = array_shift($this->middlewares);
         return $middleware(... [$request, $this]);
     }

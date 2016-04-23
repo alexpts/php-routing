@@ -5,9 +5,9 @@ use PTS\Routing\Route;
 
 class ControllerPoint extends AbstractPoint
 {
-    private $controller;
-    private $action;
-    
+    protected $controller;
+    protected $action;
+
     /**
      * @param Route $route
      * @param array $args

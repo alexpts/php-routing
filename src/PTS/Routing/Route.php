@@ -2,10 +2,11 @@
 namespace PTS\Routing;
 
 use Psr\Http\Message\RequestInterface;
+use PTS\Routing\Traits\MiddlewaresTrait;
 
 class Route
 {
-    use Traits\Middlewares;
+    use MiddlewaresTrait;
 
     /** @var string */
     protected $path;
@@ -43,12 +44,11 @@ class Route
             return $middleware(... [$request, $this]);
         }
 
-        if (count($this->middlewares) === 0) {
+        if (count($this->getMiddlewares()) === 0) {
             return call_user_func_array($this->handler, $this->handlerParams);
         }
 
-        $middleware = array_shift($this->middlewares);
-        return $middleware(... [$request, $this]);
+        return $this->invoke($request);
     }
 
     /**
