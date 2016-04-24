@@ -36,7 +36,8 @@ class Route
     public function __invoke(RequestInterface $request)
     {
         if (count($this->getMiddlewares()) === 0) {
-            return $this->endPoint();
+            $endPoint = $this->endPoint;
+            return $endPoint();
         }
 
         return $this->invoke($request);
