@@ -17,7 +17,7 @@ class CallWithMatchParams
             return strpos($name, '_') !== 0;
         }, \ARRAY_FILTER_USE_KEY);
 
-        $route->setHandlerParams($args);
+        $route->getEndPoint()->setArgs($args);
 
         return $route($request);
     }

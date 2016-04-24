@@ -45,7 +45,7 @@ class CheckXHRTest extends PHPUnit_Framework_TestCase
         $route->pushMiddleware(new CheckXHR(CheckXHR::ONLY_NO_XHR));
 
         $request = new Request('/profile/alex/');
-
+        
         self::assertEquals(200, $route($request));
     }
 

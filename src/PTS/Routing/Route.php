@@ -11,13 +11,9 @@ class Route
     /** @var string */
     protected $path;
     /** @var callable */
-    protected $handler;
-    /** @var [] */
-    protected $handlerParams = [];
+    protected $endPoint;
     /** @var array */
     protected $methods = [];
-    /** @var RouteGroup */
-    protected $group;
     /** @var array */
     protected $restrictions = [];
     /** @var array */
@@ -30,8 +26,7 @@ class Route
     public function __construct(string $path, callable $handler)
     {
         $this->path = $path;
-        $this->handler = $handler;
-        $this->group = new RouteGroup();
+        $this->endPoint = new EndPoint($handler);
     }
 
     /**
@@ -40,33 +35,19 @@ class Route
      */
     public function __invoke(RequestInterface $request)
     {
-        if ($middleware = $this->group->shiftMiddleware()) {
-            return $middleware(... [$request, $this]);
-        }
-
         if (count($this->getMiddlewares()) === 0) {
-            return call_user_func_array($this->handler, $this->handlerParams);
+            return $this->endPoint();
         }
 
         return $this->invoke($request);
     }
 
     /**
-     * @param array $params
-     * @return $this
+     * @return EndPoint
      */
-    public function setHandlerParams(array $params = [])
+    public function getEndPoint() : EndPoint
     {
-        $this->handlerParams = $params;
-        return $this;
-    }
-
-    /**
-     * @return array
-     */
-    public function getHandlerParams() : array
-    {
-        return $this->handlerParams;
+        return $this->endPoint;
     }
 
     /**
@@ -88,32 +69,11 @@ class Route
     }
 
     /**
-     * @param RouteGroup $group
-     * @return $this
-     */
-    public function setGroup(RouteGroup $group)
-    {
-        $this->group = $group;
-        return $this;
-    }
-
-    /**
-     * @return RouteGroup|null
-     */
-    public function getGroup()
-    {
-        return $this->group;
-    }
-
-    /**
      * @return string
      */
     public function getPath() : string
     {
-        $path = $this->group ? $this->group->getPrefix() : '';
-        $path .= $this->path;
-
-        return $path;
+        return $this->path;
     }
 
     /**

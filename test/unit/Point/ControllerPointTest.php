@@ -6,6 +6,7 @@ use PTS\Routing\Middlewares\CallWithMatchParams;
 use PTS\Routing\Point\ControllerPoint;
 use PTS\Routing\Route;
 use PTS\Routing\Point;
+use PTS\Routing\RouteResult;
 use PTS\Routing\RouteService;
 use Zend\Diactoros\Request;
 use PTS\Routing\Middlewares\RunPoint;
@@ -76,7 +77,7 @@ class ControllerPointTest extends PHPUnit_Framework_TestCase
 
         $this->coll->add('some', $this->route);
         $route = $this->matcher->match($this->coll, $request->getUri()->getPath())->current();
-
+        
         self::assertEquals('profile:alex', $route($request));
     }
 

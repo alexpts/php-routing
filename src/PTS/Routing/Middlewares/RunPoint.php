@@ -13,8 +13,8 @@ class RunPoint
      */
     public function __invoke(RequestInterface $request, Route $route)
     {
-        $args = $route->getHandlerParams();
-        $route->setHandlerParams([$route, $args]);
+        $endpoint = $route->getEndPoint();
+        $endpoint->setArgs([$route, $endpoint->getArgs()]);
 
         return $route($request);
     }

@@ -3,7 +3,6 @@
 use Psr\Http\Message\RequestInterface;
 use PTS\Routing\Route;
 use PTS\Routing\Point;
-use PTS\Routing\RouteGroup;
 
 class RouteTest extends PHPUnit_Framework_TestCase
 {
@@ -31,15 +30,15 @@ class RouteTest extends PHPUnit_Framework_TestCase
         self::assertEquals('response', $route($request));
     }
 
-    public function testHandleParams()
+    public function testEndPointsParams()
     {
         $data = [
             'a' => 1,
             'b' => 'some'
         ];
 
-        $this->route->setHandlerParams($data);
-        $params = $this->route->getHandlerParams();
+        $this->route->getEndPoint()->setArgs($data);
+        $params = $this->route->getEndPoint()->getArgs();
 
         self::assertEquals($data, $params);
     }
@@ -70,31 +69,9 @@ class RouteTest extends PHPUnit_Framework_TestCase
         self::assertEquals($data, $this->route->getRestrictions());
     }
 
-    public function testGroup()
-    {
-        $group = new RouteGroup();
-        $this->route->setGroup($group);
-        self::assertEquals($group, $this->route->getGroup());
-    }
-
     public function testMiddleware()
     {
         $this->route->pushMiddleware(function(RequestInterface $request, callable $next){
-            $response = $next($request);
-            return $response . '2';
-        });
-
-        $request = new \Zend\Diactoros\Request('/');
-        $route = $this->route;
-        self::assertEquals('response2', $route($request));
-    }
-
-    public function testMiddlewareGroup()
-    {
-        $group = new RouteGroup();
-        $this->route->setGroup($group);
-
-        $group->pushMiddleware(function(RequestInterface $request, callable $next){
             $response = $next($request);
             return $response . '2';
         });
