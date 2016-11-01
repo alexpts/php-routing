@@ -1,8 +1,9 @@
 <?php
+declare(strict_types=1);
 
 use PTS\Routing\CollectionRoute;
 use PTS\Routing\Route;
-use PTS\Routing\Point;
+use PTS\Tools\DuplicateKeyException;
 
 class CollectionRouteTest extends PHPUnit_Framework_TestCase
 {
@@ -33,8 +34,8 @@ class CollectionRouteTest extends PHPUnit_Framework_TestCase
 
     public function testAddDuplicate()
     {
-        $this->expectException(OverflowException::class);
-        $this->expectExceptionMessage('Route with the same name already exists');
+        $this->expectException(DuplicateKeyException::class);
+        $this->expectExceptionMessage('Item with name default already defined');
 
         $this->routes->add('default', new Route('/blog/', $this->endPoint));
         $this->routes->add('default', new Route('/category/', $this->endPoint));
@@ -43,7 +44,7 @@ class CollectionRouteTest extends PHPUnit_Framework_TestCase
     public function testClean()
     {
         $this->routes->add('default', new Route('/blog/', $this->endPoint));
-        $this->routes->clean();
+        $this->routes->flush();
         $routes = $this->routes->getRoutes();
 
         self::assertCount(0, $routes);
@@ -62,7 +63,7 @@ class CollectionRouteTest extends PHPUnit_Framework_TestCase
     {
         $this->routes->add('default', new Route('/blog/', $this->endPoint), 70);
         $this->routes->add('cats', new Route('/cats/', $this->endPoint), 50);
-        $this->routes->removeWithPriority('default', 70);
+        $this->routes->removeItem('default', 70);
         $routes = $this->routes->getRoutes();
 
         self::assertCount(1, $routes);

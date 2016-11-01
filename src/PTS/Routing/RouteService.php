@@ -1,7 +1,6 @@
 <?php
+declare(strict_types=1);
 namespace PTS\Routing;
-
-use PTS\Routing;
 
 class RouteService
 {
