@@ -4,11 +4,8 @@ namespace PTS\Routing;
 
 class RouteService
 {
-    /**
-     * @param Route $route
-     * @return string
-     */
-    public function makeRegExp(Route $route)
+
+    public function makeRegExp(Route $route) : string
     {
         $regexp = $route->getPath();
         $restrictions = $route->getRestrictions();

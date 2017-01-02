@@ -9,9 +9,6 @@ class Matcher
     /** @var Route */
     protected $routeNotFound;
 
-    /**
-     * @param RouteService $routeService
-     */
     public function __construct(RouteService $routeService)
     {
         $this->routeService = $routeService;
@@ -20,22 +17,13 @@ class Matcher
         });
     }
 
-    /**
-     * @param Route $route
-     * @return $this
-     */
     public function setNotFoundHandler(Route $route)
     {
         $this->routeNotFound = $route;
         return $this;
     }
 
-    /**
-     * @param CollectionRoute $routes
-     * @param string $path
-     * @return \Generator
-     */
-    public function match(CollectionRoute $routes, $path) : \Generator
+    public function match(CollectionRoute $routes, string $path) : \Generator
     {
         foreach ($routes->getRoutes() as $route) {
             $activeRoute = $this->matchRule($route, $path);
@@ -47,12 +35,7 @@ class Matcher
         yield $this->routeNotFound;
     }
 
-    /**
-     * @param Route $route
-     * @param string $pathUrl
-     * @return Route|null
-     */
-    protected function matchRule(Route $route, $pathUrl)
+    protected function matchRule(Route $route, string $pathUrl) : ?Route
     {
         $activeRoute = null;
         

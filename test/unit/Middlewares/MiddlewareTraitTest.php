@@ -2,23 +2,21 @@
 
 use PTS\Routing\Middlewares\CheckXHR;
 use PTS\Routing\Route;
-use PTS\Routing\Point;
 use Zend\Diactoros\Request;
 
 class MiddlewareTraitTest extends PHPUnit_Framework_TestCase
 {
-
     /** @var Route */
     protected $route;
 
-    protected function setUp()
+    protected function setUp() : void
     {
         $this->route = new Route('/profile/{name}/', function () {
             return 200;
         });
     }
 
-    public function testMiddlewareXHR()
+    public function testMiddlewareXHR() : void
     {
         $route = $this->route;
         $route->pushMiddleware(new CheckXHR(CheckXHR::ONLY_XHR));
@@ -29,7 +27,7 @@ class MiddlewareTraitTest extends PHPUnit_Framework_TestCase
         self::assertEquals(200, $route($request));
     }
 
-    public function testMiddlewareXHRBad()
+    public function testMiddlewareXHRBad() : void
     {
         $route = $this->route;
         $route->pushMiddleware(new CheckXHR(CheckXHR::ONLY_XHR));
@@ -39,7 +37,7 @@ class MiddlewareTraitTest extends PHPUnit_Framework_TestCase
         self::assertEquals(null, $route($request));
     }
 
-    public function testMiddlewareNoXHR()
+    public function testMiddlewareNoXHR() : void
     {
         $route = $this->route;
         $route->pushMiddleware(new CheckXHR(CheckXHR::ONLY_NO_XHR));
@@ -49,7 +47,7 @@ class MiddlewareTraitTest extends PHPUnit_Framework_TestCase
         self::assertEquals(200, $route($request));
     }
 
-    public function testMiddlewareNoXHRBad()
+    public function testMiddlewareNoXHRBad() : void
     {
         $route = $this->route;
         $route->pushMiddleware(new CheckXHR(CheckXHR::ONLY_NO_XHR));

@@ -7,11 +7,7 @@ use PTS\Routing\Route;
 
 class CallWithMatchParams
 {
-    /**
-     * @param RequestInterface $request
-     * @param Route $route
-     * @return mixed
-     */
+
     public function __invoke(RequestInterface $request, Route $route)
     {
         $args = array_filter($route->getMatches(), function($name){

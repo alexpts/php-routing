@@ -1,7 +1,6 @@
 <?php
 
 use PTS\Routing\Route;
-use PTS\Routing\Point;
 use PTS\Routing\RouteService;
 
 class RouteServiceTest extends PHPUnit_Framework_TestCase
@@ -33,7 +32,7 @@ class RouteServiceTest extends PHPUnit_Framework_TestCase
         self::assertEquals('/controller/(?<action>.*)/', $regexp);
     }
 
-    public function testRegexpWithResriction()
+    public function testRegexpWithRestriction()
     {
         $route = new Route('/controller/{action}/', function(){});
         $route->setRestrictions(['action' => '\w+']);
