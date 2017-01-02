@@ -1,5 +1,5 @@
 <?php
-declare(strict_types=1);
+declare(strict_types = 1);
 namespace PTS\Routing;
 
 class Matcher
@@ -12,8 +12,8 @@ class Matcher
     public function __construct(RouteService $routeService)
     {
         $this->routeService = $routeService;
-        $this->routeNotFound = new Route('', function(){
-           return null;
+        $this->routeNotFound = new Route('', function () {
+            return null;
         });
     }
 
@@ -35,13 +35,13 @@ class Matcher
         yield $this->routeNotFound;
     }
 
-    protected function matchRule(Route $route, string $pathUrl) : ?Route
+    protected function matchRule(Route $route, string $pathUrl) : ? Route
     {
         $activeRoute = null;
-        
+
         $regexp = $this->routeService->makeRegExp($route);
 
-        if (preg_match('~^' .  $regexp . '$~Uiu', $pathUrl, $values)) {
+        if (preg_match('~^'.$regexp.'$~Uiu', $pathUrl, $values)) {
             $filterValues = array_filter(array_keys($values), 'is_string');
             $matches = array_intersect_key($values, array_flip($filterValues));
             $activeRoute = $route->setMatches($matches);

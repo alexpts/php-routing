@@ -1,5 +1,5 @@
 <?php
-declare(strict_types=1);
+declare(strict_types = 1);
 namespace PTS\Routing\Traits;
 
 use Psr\Http\Message\RequestInterface;
@@ -24,7 +24,8 @@ trait MiddlewaresTrait
         return $this->middlewares;
     }
 
-    protected function invoke(RequestInterface $request) {
+    protected function invoke(RequestInterface $request)
+    {
         $middleware = array_shift($this->middlewares);
         return $middleware(... [$request, $this]);
     }
