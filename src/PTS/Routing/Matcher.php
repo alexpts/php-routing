@@ -35,7 +35,7 @@ class Matcher
         yield $this->routeNotFound;
     }
 
-    protected function matchRule(Route $route, string $pathUrl) : ? Route
+    protected function matchRule(Route $route, string $pathUrl) : ?Route
     {
         $activeRoute = null;
 

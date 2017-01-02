@@ -12,7 +12,7 @@ class RouteTest extends PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
-        $this->endPoint = function(){
+        $this->endPoint = function () {
             return 'response';
         };
         $this->route = new Route('/', $this->endPoint);

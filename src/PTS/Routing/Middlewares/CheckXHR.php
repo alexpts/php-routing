@@ -6,8 +6,8 @@ use Psr\Http\Message\RequestInterface;
 
 class CheckXHR
 {
-    public const ONLY_XHR = 1;
-    public const ONLY_NO_XHR = 2;
+    const ONLY_XHR = 1;
+    const ONLY_NO_XHR = 2;
 
     protected $state;
 
