@@ -1,10 +1,11 @@
 <?php
 
+use PHPUnit\Framework\TestCase;
 use PTS\Routing\Middlewares\CheckXHR;
 use PTS\Routing\Route;
 use Zend\Diactoros\Request;
 
-class MiddlewareTraitTest extends PHPUnit_Framework_TestCase
+class MiddlewareTraitTest extends TestCase
 {
     /** @var Route */
     protected $route;

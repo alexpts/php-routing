@@ -1,21 +1,22 @@
 <?php
 
+use PHPUnit\Framework\TestCase;
 use PTS\Routing\Route;
 use PTS\Routing\RouteService;
 
-class RouteServiceTest extends PHPUnit_Framework_TestCase
+class RouteServiceTest extends TestCase
 {
     /** @var RouteService */
     protected $service;
 
     protected function setUp()
     {
-        $this->service = new RouteService();
+        $this->service = new RouteService;
     }
 
     public function testCreate()
     {
-        new RouteService();
+        self::assertInstanceOf(RouteService::class, new RouteService);
     }
 
     public function testSimpleRegexp()

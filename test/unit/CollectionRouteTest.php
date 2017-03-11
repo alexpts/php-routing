@@ -1,15 +1,16 @@
 <?php
 declare(strict_types=1);
 
+use PHPUnit\Framework\TestCase;
 use PTS\Routing\CollectionRoute;
 use PTS\Routing\Route;
 use PTS\Tools\DuplicateKeyException;
 
-class CollectionRouteTest extends PHPUnit_Framework_TestCase
+class CollectionRouteTest extends TestCase
 {
     /** @var CollectionRoute */
     protected $routes;
-
+    /** @var callable */
     public $endPoint;
 
     protected function setUp()

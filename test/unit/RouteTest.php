@@ -2,9 +2,9 @@
 
 use Psr\Http\Message\RequestInterface;
 use PTS\Routing\Route;
-use PTS\Routing\Point;
+use PHPUnit\Framework\TestCase;
 
-class RouteTest extends PHPUnit_Framework_TestCase
+class RouteTest extends TestCase
 {
     /** @var Route */
     protected $route;
@@ -20,7 +20,8 @@ class RouteTest extends PHPUnit_Framework_TestCase
 
     public function testCreate()
     {
-        new Route('/', $this->endPoint);
+        $route = new Route('/', $this->endPoint);
+        self::assertInstanceOf(Route::class, $route);
     }
 
     public function testInvoke()

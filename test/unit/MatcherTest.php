@@ -1,12 +1,12 @@
 <?php
 
+use PHPUnit\Framework\TestCase;
 use PTS\Routing\Route;
-use PTS\Routing\Point;
 use PTS\Routing\CollectionRoute;
 use PTS\Routing\Matcher;
 use PTS\Routing\RouteService;
 
-class MatcherTest extends PHPUnit_Framework_TestCase
+class MatcherTest extends TestCase
 {
     /** @var CollectionRoute */
     protected $coll;
@@ -30,7 +30,8 @@ class MatcherTest extends PHPUnit_Framework_TestCase
 
     public function testCreate()
     {
-        new Matcher(new RouteService());
+        $matcher = new Matcher(new RouteService);
+        self::assertInstanceOf(Matcher::class, $matcher);
     }
 
     public function testNotFoundHandler()

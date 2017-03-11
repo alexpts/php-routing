@@ -1,11 +1,11 @@
 <?php
 
+use PHPUnit\Framework\TestCase;
 use PTS\Routing\Middlewares\CheckXHR;
 use PTS\Routing\Route;
-use PTS\Routing\Point;
 use Zend\Diactoros\Request;
 
-class CheckXHRTest extends PHPUnit_Framework_TestCase
+class CheckXHRTest extends TestCase
 {
 
     /** @var Route */
@@ -21,7 +21,7 @@ class CheckXHRTest extends PHPUnit_Framework_TestCase
     public function testMiddlewareXHR()
     {
         $route = $this->route;
-        $route->pushMiddleware(new CheckXHR(CheckXHR::ONLY_XHR));
+        $this->route->pushMiddleware(new CheckXHR(CheckXHR::ONLY_XHR));
 
         $request = new Request('/profile/alex/');
         $request = $request->withHeader('X-Requested-With', 'XMLHttpRequest');

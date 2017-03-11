@@ -1,14 +1,14 @@
 <?php
 
+use PHPUnit\Framework\TestCase;
 use PTS\Routing\CollectionRoute;
 use PTS\Routing\Matcher;
 use PTS\Routing\RouteService;
 use PTS\Routing\Route;
-use PTS\Routing\Point;
 use PTS\Routing\Middlewares\CallWithMatchParams;
 use Zend\Diactoros\Request;
 
-class CallWithMatchParamsTest extends PHPUnit_Framework_TestCase
+class CallWithMatchParamsTest extends TestCase
 {
 
     public function testMiddleware()
