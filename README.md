@@ -36,3 +36,27 @@ $activeRoute = $matcher->match($this->coll, '/')->current();
 $response = $activeRoute($request); // PSR-7 request
 
 `````
+
+#### Захват параметров из url
+Захваченные параметры могут быть переданы в качестве аргументов в обработчик.
+Параметры начинающиеся с символа `_` игнорируются. Они нужны для технических нужд.
+
+``````php
+use PTS\Routing\Route;
+use PTS\Routing\CollectionRoute;
+use PTS\Routing\Matcher;
+use PTS\Routing\RouteService;
+use Psr\Http\Message\RequestInterface;
+
+$route = new Route('/users/{userId}/', function($userId){
+    return $userId;
+});
+$route->pushMiddleware(new CallWithMatchParams);
+
+$collection = new CollectionRoute();
+$collection->add('user', $route);
+$matcher = new Matcher(new RouteService());
+
+$activeRoute = $matcher->match($this->coll, '/users/4/')->current();
+
+`````
