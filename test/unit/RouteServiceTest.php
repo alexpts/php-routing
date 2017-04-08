@@ -30,7 +30,7 @@ class RouteServiceTest extends TestCase
     {
         $route = new Route('/controller/{action}/', function(){});
         $regexp = $this->service->makeRegExp($route);
-        self::assertEquals('/controller/(?<action>.*)/', $regexp);
+        self::assertEquals('/controller/(?<action>[^\/]+)/', $regexp);
     }
 
     public function testRegexpWithRestriction()

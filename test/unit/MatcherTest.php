@@ -21,7 +21,11 @@ class MatcherTest extends TestCase
             return 'main';
         }));
 
-        $this->coll->add('blog', new Route('/blog/{id}/', function(){
+        $this->coll->add('dynamic', new Route('/{controller}/({action}/)?', function(){
+            return 'dynamic';
+        }));
+
+        $this->coll->add('blog', new Route('/web/blog/{id}/', function(){
             return 'blog';
         }));
 
@@ -41,15 +45,23 @@ class MatcherTest extends TestCase
         }));
 
         /** @var Route $route */
-        $route = $this->matcher->match($this->coll, '/none/')->current();
+        $route = $this->matcher->match($this->coll, '/none/some/none/')->current();
         self::assertEquals('/404', $route->getPath());
+    }
+
+    public function testMatchOnGreedy()
+    {
+        /** @var Route $route */
+        $route = $this->matcher->match($this->coll, '/post/delete/')->current();
+        self::assertEquals('/{controller}/({action}/)?', $route->getPath());
+        self::assertEquals(['action' => 'delete', 'controller' => 'post'], $route->getMatches());
     }
 
     public function testMatch()
     {
         /** @var Route $route */
-        $route = $this->matcher->match($this->coll, '/blog/3/')->current();
-        self::assertEquals('/blog/{id}/', $route->getPath());
+        $route = $this->matcher->match($this->coll, '/web/blog/3/')->current();
+        self::assertEquals('/web/blog/{id}/', $route->getPath());
         self::assertEquals(['id' => '3'], $route->getMatches());
     }
 }

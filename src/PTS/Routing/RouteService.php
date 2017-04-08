@@ -14,7 +14,7 @@ class RouteService
         if (preg_match_all('~{(.*)}~Uu', $regexp, $placeholders)) {
             foreach ($placeholders[0] as $index => $match) {
                 $name = $placeholders[1][$index];
-                $replace = array_key_exists($name, $restrictions) ? $restrictions[$name] : '.*';
+                $replace = array_key_exists($name, $restrictions) ? $restrictions[$name] : '[^\/]+';
                 $replace = '(?<'.$name.'>'.$replace.')';
                 $regexp = str_replace($match, $replace, $regexp);
             }
