@@ -21,7 +21,7 @@
 - Адаптирован для работы с REST
 
 #### Простой роутинг
-``````php
+```php
 use PTS\Routing\Route;
 use PTS\Routing\CollectionRoute;
 use PTS\Routing\Matcher;
@@ -35,14 +35,13 @@ $matcher = new Matcher(new RouteService());
 
 $activeRoute = $matcher->match($this->coll, '/')->current();
 $response = $activeRoute($request); // PSR-7 request
+```
 
-`````
-
-#### Захват параметров из url
+#### Захват параметров из url ####
 Захваченные параметры могут быть переданы в качестве аргументов в обработчик.
 Параметры начинающиеся с символа `_` игнорируются. Они нужны для технических нужд.
 
-``````php
+```php
 use PTS\Routing\Route;
 use PTS\Routing\CollectionRoute;
 use PTS\Routing\Matcher;
@@ -60,4 +59,4 @@ $matcher = new Matcher(new RouteService());
 
 $activeRoute = $matcher->match($this->coll, '/users/4/')->current();
 
-`````
+```
