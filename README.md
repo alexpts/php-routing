@@ -33,7 +33,7 @@ $collection = new CollectionRoute();
 $collection->add('main', $route);
 $matcher = new Matcher(new RouteService());
 
-$activeRoute = $matcher->match($this->coll, '/')->current();
+$activeRoute = $matcher->match($collection, '/')->current();
 $response = $activeRoute($request); // PSR-7 request
 ```
 
@@ -57,6 +57,6 @@ $collection = new CollectionRoute();
 $collection->add('user', $route);
 $matcher = new Matcher(new RouteService());
 
-$activeRoute = $matcher->match($this->coll, '/users/4/')->current();
+$activeRoute = $matcher->match($collection, '/users/4/')->current();
 
 ```
