@@ -28,7 +28,9 @@ use PTS\Routing\Matcher;
 use PTS\Routing\RouteService;
 use Psr\Http\Message\RequestInterface;
 
-$route = new Route('/', function(){});
+$route = new Route('/', function(){
+    return ['response' => 'data'];
+});
 $collection = new CollectionRoute();
 $collection->add('main', $route);
 $matcher = new Matcher(new RouteService());
