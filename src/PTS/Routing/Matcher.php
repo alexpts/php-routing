@@ -1,5 +1,6 @@
 <?php
 declare(strict_types = 1);
+
 namespace PTS\Routing;
 
 class Matcher
@@ -17,13 +18,13 @@ class Matcher
         });
     }
 
-    public function setNotFoundHandler(Route $route)
+    public function setNotFoundHandler(Route $route): self
     {
         $this->routeNotFound = $route;
         return $this;
     }
 
-    public function match(CollectionRoute $routes, string $path) : \Generator
+    public function match(CollectionRoute $routes, string $path): \Generator
     {
         foreach ($routes->getRoutes() as $route) {
             $activeRoute = $this->matchRule($route, $path);
@@ -32,17 +33,17 @@ class Matcher
             }
         }
 
-        yield $this->routeNotFound;
+        return yield $this->routeNotFound;
     }
 
-    protected function matchRule(Route $route, string $pathUrl) : ?Route
+    protected function matchRule(Route $route, string $pathUrl): ?Route
     {
         $activeRoute = null;
 
         $regexp = $this->routeService->makeRegExp($route);
 
         if (preg_match('~^'.$regexp.'$~Uiu', $pathUrl, $values)) {
-            $filterValues = array_filter(array_keys($values), 'is_string');
+            $filterValues = array_filter(array_keys($values), '\is_string');
             $matches = array_intersect_key($values, array_flip($filterValues));
             $activeRoute = $route->setMatches($matches);
         }

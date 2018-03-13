@@ -1,5 +1,6 @@
 <?php
 declare(strict_types = 1);
+
 namespace PTS\Routing;
 
 class EndPoint
@@ -9,7 +10,6 @@ class EndPoint
     /** @var array */
     protected $args = [];
 
-
     public function __construct(callable $handler, array $args = [])
     {
         $this->handler = $handler;
@@ -18,16 +18,16 @@ class EndPoint
 
     public function __invoke()
     {
-        return call_user_func_array($this->handler, $this->args);
+        return \call_user_func_array($this->handler, $this->args);
     }
 
-    public function setArgs(array $args = [])
+    public function setArgs(array $args = []): self
     {
         $this->args = $args;
         return $this;
     }
 
-    public function getArgs() : array
+    public function getArgs(): array
     {
         return $this->args;
     }

@@ -1,5 +1,6 @@
 <?php
 declare(strict_types = 1);
+
 namespace PTS\Routing\Traits;
 
 use Psr\Http\Message\RequestInterface;
@@ -10,7 +11,7 @@ trait MiddlewaresTrait
     protected $middlewares = [];
 
 
-    public function pushMiddleware(callable $middleware)
+    public function pushMiddleware(callable $middleware): self
     {
         $this->middlewares[] = $middleware;
         return $this;
@@ -19,7 +20,7 @@ trait MiddlewaresTrait
     /**
      * @return \callable[]
      */
-    public function getMiddlewares() : array
+    public function getMiddlewares(): array
     {
         return $this->middlewares;
     }

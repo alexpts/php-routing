@@ -1,5 +1,6 @@
 <?php
 declare(strict_types = 1);
+
 namespace PTS\Routing\Middlewares;
 
 use Psr\Http\Message\RequestInterface;

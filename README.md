@@ -28,7 +28,7 @@ use PTS\Routing\Matcher;
 use PTS\Routing\RouteService;
 use Psr\Http\Message\RequestInterface;
 
-$route = new Route('/', function(){
+$route = new Route('/', function() {
     return ['response' => 'data'];
 });
 $collection = new CollectionRoute();
@@ -50,7 +50,7 @@ use PTS\Routing\Matcher;
 use PTS\Routing\RouteService;
 use Psr\Http\Message\RequestInterface;
 
-$route = new Route('/users/{userId}/', function($userId){
+$route = new Route('/users/{userId}/', function($userId) {
     return $userId;
 });
 $route->pushMiddleware(new CallWithMatchParams);

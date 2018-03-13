@@ -1,5 +1,6 @@
 <?php
 declare(strict_types = 1);
+
 namespace PTS\Routing;
 
 use Psr\Http\Message\RequestInterface;
@@ -28,51 +29,51 @@ class Route
 
     public function __invoke(RequestInterface $request)
     {
-        if (count($this->getMiddlewares()) === 0) {
+        if (\count($this->getMiddlewares()) === 0) {
             return ($this->endPoint)();
         }
 
         return $this->invoke($request);
     }
 
-    public function getEndPoint() : EndPoint
+    public function getEndPoint(): EndPoint
     {
         return $this->endPoint;
     }
 
-    public function setRestrictions(array $restrictions)
+    public function setRestrictions(array $restrictions): self
     {
         $this->restrictions = $restrictions;
         return $this;
     }
 
-    public function getRestrictions() : array
+    public function getRestrictions(): array
     {
         return $this->restrictions;
     }
 
-    public function getPath() : string
+    public function getPath(): string
     {
         return $this->path;
     }
 
-    public function setMatches(array $values = [])
+    public function setMatches(array $values = []): self
     {
         $this->matches = $values;
         return $this;
     }
 
-    public function getMatches() : array
+    public function getMatches(): array
     {
         return $this->matches;
     }
 
-    public function getMethods() : array
+    public function getMethods(): array
     {
         return $this->methods;
     }
 
-    public function setMethods(array $methods)
+    public function setMethods(array $methods): self
     {
         $this->methods = $methods;
         return $this;
